@@ -10,10 +10,10 @@ scripts:
   - docker run niass/docker-react-test npm run test -- --coverage
 
 after_success:
-  - docker build -t niass/multi-client ./client
-  - docker build -t niass/multi-nginx ./nginx
-  - docker build -t niass/multi-server ./server 
-  - docker build -t niass/multi-worker ./worker 
+  - travis_wait 40 docker build -t niass/multi-client ./client
+  -  travis_wait 40docker build -t niass/multi-nginx ./nginx
+  -  travis_wait 40docker build -t niass/multi-server ./server 
+  - travis_wait 40 docker build -t niass/multi-worker ./worker 
   # login in to docker
   - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
   # Push images to docker

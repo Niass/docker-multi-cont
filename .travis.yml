@@ -14,8 +14,9 @@ after_script:
   - docker build -t niass/multi-nginx ./nginx
   - docker build -t niass/multi-server ./server 
   - docker build -t niass/multi-worker ./worker 
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - docker run niass/docker-react-test npm run test -- --coverage
   # login in to docker
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
   # Push images to docker
   - docker push niass/multi-client
   - docker push niass/multi-nginx

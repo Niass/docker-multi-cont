@@ -10,7 +10,7 @@ before_install:
   - docker build -t niass/docker-react-test -f ./client/Dockerfile.dev ./client
 
 scripts:
-  - docker run -e CI=true niass/docker-react-test npm run test -- --coverage
+  - docker run niass/docker-react-test npm run test -- --coverage
 
 after_success:
   - echo $MY_SECRET_SMILE

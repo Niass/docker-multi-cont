@@ -9,7 +9,7 @@ before_install:
 scripts:
   - docker run niass/docker-react-test npm run test -- --coverage
 
-after_success:
+after_script:
   - docker build -t niass/multi-client ./client
   - docker build -t niass/multi-nginx ./nginx
   - docker build -t niass/multi-server ./server 

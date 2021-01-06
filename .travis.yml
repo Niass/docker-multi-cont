@@ -4,14 +4,16 @@ node_js:
 services:
   - docker
 before_install:
+  - echo $MY_TEST_CONSOLE
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   
   - docker build -t niass/docker-react-test -f ./client/Dockerfile.dev ./client
 
-# scripts:
-#   - docker run niass/docker-react-test npm run test -- --coverage
+scripts:
+  - docker run niass/docker-react-test npm run test -- --coverage
 
 after_success:
+  - echo $MY_SECRET_SMILE
   - docker build -t niass/multi-client ./client
   - docker build -t niass/multi-nginx ./nginx
   - docker build -t niass/multi-server ./server 
@@ -22,3 +24,6 @@ after_success:
   - docker push niass/multi-nginx
   - docker push niass/multi-server
   - docker push niass/multi-worker
+
+after_failure:
+  - echo $MY_SECRET_HANGRY

@@ -4,7 +4,8 @@ node_js:
 services:
   - docker
 before_install:
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  
   - docker build -t niass/docker-react-test -f ./client/Dockerfile.dev ./client
 
 scripts:
